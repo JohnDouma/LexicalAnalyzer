@@ -67,4 +67,21 @@ public class LexerTest {
             throw new RuntimeException(e);
         }
     }
+
+    public void scanShouldIgnoreWhiteSpace() {
+        Lexer lexer = new Lexer();
+        try {
+            // The argument to lexer.scan has a tab between 56 and -12 and three spaces
+            // between -12 and *16
+            List<Token> tokens = lexer.scan("56  -12   *16");
+            assertEquals(5, tokens.size());
+            assertEquals(56, ((Num)tokens.get(0)).value);
+            assertEquals('-', ((Operator)tokens.get(1)).oper);
+            assertEquals(12, ((Num)tokens.get(2)).value);
+            assertEquals('*', ((Operator)tokens.get(3)).oper);
+            assertEquals(16, ((Num)tokens.get(4)).value);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

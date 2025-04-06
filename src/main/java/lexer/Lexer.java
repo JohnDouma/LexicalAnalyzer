@@ -31,7 +31,7 @@ public class Lexer {
         int position = 0;
         while (position < input.length()) {
             peek = input.charAt(position);
-            if (peek == ' ' || peek == '\r') {
+            if (peek == ' ' || peek == '\t') {
                 position++;
             } else if (peek == '\n') {
                 line++;
